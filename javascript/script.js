@@ -75,8 +75,7 @@ const displayJobsList = function (jobsFilteredData) {
         const boxData = document.createElement("div");
         const headTitles = document.createElement("div");
         const companyName = document.createElement("span");
-        const status = document.createElement("span");
-        const featured = document.createElement("span");
+
         const positionName = document.createElement("h3");
         const details = document.createElement("div");
         const postedAt = document.createElement("span");
@@ -92,8 +91,9 @@ const displayJobsList = function (jobsFilteredData) {
         boxData.classList.add("box-data");
         headTitles.classList.add("head-titles");
         companyName.classList.add("company-name");
-        status.classList.add("status");
-        featured.classList.add("featured");
+
+
+
         positionName.classList.add("position-name");
         details.classList.add("details");
         postedAt.classList.add("posted-at");
@@ -103,10 +103,21 @@ const displayJobsList = function (jobsFilteredData) {
         roleKeyword.classList.add(`keyword`);
         levelKeyword.classList.add(`keyword`);
 
-
         headTitles.appendChild(companyName);
-        headTitles.appendChild(status);
-        headTitles.appendChild(featured);
+
+        if (job.new) {
+            const status = document.createElement("span");
+            status.classList.add("status");
+            headTitles.appendChild(status).textContent = "New!";
+        }
+
+        if (job.featured) {
+            const featured = document.createElement("span");
+            featured.classList.add("featured");
+            featured.textContent = "featured";
+            headTitles.appendChild(featured);
+        }
+
         details.appendChild(postedAt);
         details.appendChild(contract);
         details.appendChild(location);
@@ -143,8 +154,6 @@ const displayJobsList = function (jobsFilteredData) {
 
         imageHead.src = job.logo;
         companyName.textContent = job.company;
-        status.textContent = job.new;
-        featured.textContent = job.featured;
         positionName.textContent = job.position;
         postedAt.textContent = job.postedAt;
         contract.textContent = job.contract;
